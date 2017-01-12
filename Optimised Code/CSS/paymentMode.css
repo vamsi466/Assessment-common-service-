@@ -1,0 +1,12 @@
+/*.sidearrow.collapsed:before
+{
+	font-family: 'Glyphicons Halflings';
+	content: "\e080";
+	float: right;
+}
+.sidearrow.collapsed:after
+{
+  font-family: 'Glyphicons Halflings';
+	content:  "\e114";
+  float: right;
+}*/

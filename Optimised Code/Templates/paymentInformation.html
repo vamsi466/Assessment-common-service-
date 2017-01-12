@@ -1,0 +1,123 @@
+
+
+<div data-ng-controller="informationCtrl as info">
+    <div class="form-group col-lg-6">
+    <label for="exampleSelect1">Payment Type</label>
+    <div>
+        <span><input class="form-control input-field" type="text" placeholder="select" name = "payment" data-ng-model="info.paymentDetails.paymentvalue" required = 'required'></span>
+        <button class="btn btn-secondary fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </button>
+        <div class="dropdown-menu list-dropdown" style="overflow-y:scroll;height:150px">
+            <input type="text" placeholder="select" data-ng-model= "payment">
+            <div data-ng-repeat="data in vm.responseData.c_paymentType | filter:payment track by $index" data-ng-click='info.payment(data)'>
+                <li>{{data}}</li>
+            </div>
+        </div>
+        <div class="errormessage" data-ng-if="validationChecked && !paymentForm.payment.$valid">Please fill out this field</div>
+    </div>
+    </div>
+    <div class="form-group col-lg-6">
+        <label for="exampleSelect1">Accounting Type</label>
+        <div>
+            <span><input class="form-control input-field" type="text" placeholder="select" name = "accounting"  data-ng-model="info.paymentDetails.selectedaccountingData" required = 'required'></span>
+            <button class="btn btn-secondary fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="dropdown-menu list-dropdown" style="overflow-y:scroll;height:150px">
+                <input type="text" placeholder="select" data-ng-model="accounting" >
+                <div data-ng-repeat="data in vm.responseData.l_AccountingType | filter:accounting track by $index" data-ng-click=info.accountingSelected(data)>
+                    <li>{{data}}</li>
+                </div>
+            </div>
+            <div class="errormessage" data-ng-if="validationChecked && !paymentForm.accounting.$valid">Please fill out this field</div>
+        </div>
+    </div>
+    <div class="form-group col-lg-4">
+        <label for="exampleSelect1">Frequency</label>
+        <div>
+            <span><input class="form-control input-field" type="text" placeholder="select" name="frequency" data-ng-model="info.paymentDetails.selectedfrequencyData" required = 'required'></span>
+            <button class="btn btn-secondary fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="dropdown-menu list-dropdown" style="overflow-y:scroll;height:150px">
+                <input type="text" placeholder="select" data-ng-model="frequency">
+                <div data-ng-repeat="data in vm.responseData.c_frequecyType | filter:frequency track by $index" data-ng-click=info.frequecySelected(data)>
+                    <li data-ng-click="frequencyCondition(data)">{{data}}</li>
+                </div>
+                
+            </div>
+                <div class="errormessage" data-ng-if="validationChecked && !paymentForm.frequency.$valid">Please fill out this field</div>
+        </div>
+    </div>
+    <div class='col-md-4'>
+        <span>Period Start Date<span class = "sup">*</span><span>
+        <div class="input-group date" data-provide="datepicker" >
+            <input type="text" name = 'payStart' class="form-control" data-ng-model="info.paymentDetails.paymentStart" placeholder="mm/dd/yyyy" required = 'required'>
+            <span class="input-group-addon">
+            <i class="fa fa-calendar-o"></i>
+            </span>
+        </div>
+        <div class="errormessage" data-ng-if="validationChecked && !paymentForm.payStart.$valid">Please fill out this field</div>
+    </div> 
+    <div class="form-group col-lg-4">
+        <label for="exampleSelect1">Payment Timing</label>
+        <div >
+            <span><input class="form-control input-field" type="text" placeholder="select" name="timing" data-ng-model="info.paymentDetails.selectedpaymenttimingData" required = 'required'></span>
+            <button class="btn btn-secondary fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="dropdown-menu list-dropdown" style="overflow-y:scroll;height:150px">
+                <input type="text" placeholder="select" data-ng-model="paymentTimiing">
+                <div data-ng-repeat="data in vm.responseData.l_PaymentTiming | filter:paymentTimiing track by $index" data-ng-click=info.paymenttimingSelected(data)>
+                    <li>{{data}}</li>
+                </div>
+            </div>
+            <div class="errormessage" data-ng-if="validationChecked && !paymentForm.timing.$valid">Please fill out this field</div>
+        </div>
+    </div>
+    <!--data-ng-if="isOther && isMonthly"-->
+    <div  class="form-group col-lg-4" >
+        <label for="exampleSelect1">Payment Due On</label>
+        <div >
+            <span><input class="form-control input-field" type="text" placeholder="select" name="dueon" data-ng-model="info.paymentDetails.selectedpaymentdueonData"required = 'required'></span>
+            <button class="btn btn-secondary fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="dropdown-menu list-dropdown" style="overflow-y:scroll;height:150px">
+                <input type="text" placeholder="select" data-ng-model="paymentdueon">
+                <div data-ng-repeat="data in vm.responseData.l_PaymentDueOn| filter:paymentdueon track by $index" data-ng-click=info.paymentdueonSelected(data)>
+                <li data-ng-click="paymentDueOnCondition(data)">{{data}}</li>
+                </div>
+            </div>
+            <div class="errormessage" data-ng-if="validationChecked && !paymentForm.dueon.$valid">Please fill out this field</div>
+        </div>
+    </div>
+    <!--data-ng-if="isOther && !isSpecific"-->
+    <div  class="form-group col-lg-4">
+        <label for="exampleSelect1">Payment Due Day</label>
+        <div >
+            <span><input class="form-control input-field" type="text" placeholder="select" name="duedate" data-ng-model="info.paymentDetails.selectedpaymentduedayData" required = 'required'></span>
+            <button class="btn btn-secondary fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="dropdown-menu list-dropdown" style="overflow-y:scroll;height:150px">
+                <input type="text" placeholder="select" data-ng-model="paydueday">
+                <div  data-ng-repeat="data in vm.responseData.l_PaymentDueDay |  filter:paydueday track by $index"  data-ng-click=info.paymentduedaySelected(data)>
+                    <li>{{data}}</li>
+                </div>
+            </div>
+            <div class="errormessage" data-ng-if="validationChecked && !paymentForm.duedate.$valid">Please fill out this field</div>
+        </div>
+    </div>
+    <div class="form-group col-lg-4" >
+        <label for="exampleSelect1">Accounting Cost Center</label>
+        <input class="form-control" type="text" data-ng-model="info.paymentDetails.accountingcost">
+    </div>
+    <div class="form-check col-lg-4" data-ng-model="info.paymentDetails.checkbox">
+        <label class="form-check-label">
+        <input type="checkbox" class="form-check-input">
+        option Term Payment
+        </label>
+    </div>
+    <div class="form-group col-lg-12">
+        <label for="exampleTextarea">Description</label>
+        <textarea class="form-control" id="exampleTextarea" rows="2"></textarea>
+    </div>
+</div>
+    
+
