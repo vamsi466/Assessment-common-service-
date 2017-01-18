@@ -4,6 +4,8 @@
     angular.module('paymentMode')
     .service('commonService',function(){
         var ser = this;
+
+        //Creating all the required objects
         ser.setDetails = {};
         ser.getDetails ={};
         ser.getParamDetails ={};
@@ -12,18 +14,31 @@
         ser.editTableDetails = {};
         ser.showData = {};
         ser.validatingFields = {};
+
+        //Getting details from paymentInformation controller
         ser.getInformationDetails = function(detailsPresent){
             ser.getDetails = detailsPresent;
         }
+
+        //Setting those details which i got from paymentInformation controller
         ser.setInformationDetails = function(){
             ser.setDetails = ser.getDetails;
             
         }
+
+        //Getting details from paymentParameter controller
         ser.getParamsDetails = function(paramsDetails){
             ser.getParamDetails = paramsDetails; 
         }
 
-        /* Validation function */
+        /* 
+            Validation function which used to do validations to my form
+
+            These validations based on only for empty field and undefined value
+
+            If there is any issue like that generating an error message
+        
+         */
         ser.validationFunction = function(fields){
             ser.validatingFields.flag = true;
             ser.validatingFields.errorMessage = {};
@@ -40,6 +55,16 @@
             return ser.validatingFields;
         }
 
+
+        /*
+            Generating Data which is achieved through by extending first controller object to second one
+
+            But before genrating it we are having some validations
+
+            For generating if we have already ibject generated with a key name then the second is pushed into that
+            Otherwise new object is created
+        
+        */
         ser.generateData = function(){
             ser.finalGeneratedData = angular.extend(ser.getParamDetails,ser.getDetails)
             if(ser.finalGeneratedData.selectedfrequencyData == 'Other'){

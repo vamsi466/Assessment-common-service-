@@ -5,16 +5,26 @@
             var vm = this;
         
             vm.tableDetails = {};
+
+            //This was taken to show fields with repsect to condition of OTHER as frequencyData
             vm.showComponents = true
             vm.items = items;
             vm.errorMessage ={};
+
+            /*Initially getting the paymentInformation panel on a click on add button*/
             vm.selected = { 
                 item: vm.items[0]
             };
+
+            /* These are the file names of the JSON what we had taken*/
             var jsonFileNames = ['c_paymentType','l_AccountingType','c_frequecyType','l_PaymentTiming','l_PaymentDueDay','l_PaymentDueOn','l_GrowthType','l_ChargeAmountBasis'];
             var lengthOfFiles = jsonFileNames.length; 
             
+           /* 
+              Getting response data from JSON based on the file type
            
+              Here we are making an AJAX Call from the 'ajaxcallservice' 
+           */
             vm.responseData = {};
             for(var keyValue = 0;keyValue<lengthOfFiles;keyValue++){
                 (function(fileName){
@@ -42,6 +52,12 @@
                     });
                 })(keyValue);
             }
+            /* 
+               vm.next is the function for navigating from one panel to next panel
+            
+               Before navigating we should have a check through respective field
+               validations with respect to conditions given to the fields
+            */
             vm.next = function (informationData) {
                 var fieldsToValidate = ["paymentvalue","selectedaccountingData","selectedfrequencyData","paymentStart","selectedpaymenttimingData","selectedpaymentdueonData","selectedpaymentduedayData"];
                 if(commonService.finalGeneratedData.selectedfrequencyData === 'Other'){
@@ -73,7 +89,9 @@
             };
 
 
-
+            /*
+              previous button function is to navigate to backward with respect to panels
+            */
             vm.previous = function (informationData) {
                 vm.selected = {
                     item: vm.items[0]
@@ -81,6 +99,11 @@
             };
 
 
+            /*
+              To generate data what we want, which have been selected in their respective fields
+
+              Closing modal after the completion of validation 
+            */
             vm.generateDatatoTable = function(){
                 vm.tableDetails = commonService.generateData();
                 vm.errorMessage =commonService.validatingFields.errorMessage;
@@ -89,20 +112,29 @@
                 }   
             }
 
+            //Getting the object of the details which are edited
             vm.editDetails = commonService.detailsEdited();
             vm.showSaveButton = (vm.editDetails.showFlag == true)?true:false;
 
+
+            //To save the ditted details and closing the modal
             vm.saveEdited=function(){
                 commonService.editSaved();
                 $uibModalInstance.close();
             }
 
-            //closing modal for generate without any warnings
+            //Closing the modal which opened while add data by clicking on 'X' button
             vm.closeModal = function(){
                 $uibModalInstance.close();
             }
 
-            //showing warning when data is not saved and close is clicked
+            /*
+            This is the modal which is opened when the data is not saved and 
+            edit modal is closed
+
+            Edit confirmation details are opened in this            
+            
+            */
             vm.editconfirm = function(){
                 $uibModal.open({
                     templateUrl: './Templates/warning-modal.html',
