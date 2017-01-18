@@ -3,17 +3,20 @@
 
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!--including all the files required css-->
+		<!--including all the required library files required css-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="Assets/Font Awesome/css/font-awesome.css">
 		<link rel="stylesheet" href="Assets/Font Awesome/css/font-awesome.min.css">
 		<link href="CSS/libraryFiles/jquery-ui.min.css" rel="stylesheet">
 		<link href="CSS/libraryFiles/datepicker.css" rel="stylesheet">
+
+		<!--Application CSS file is included-->
+		<link href="CSS/paymentMode.css" rel="stylesheet">
 	</head>
 
 	<!--ngApp declared-->
 	<body data-ng-app="paymentMode">
-		<div class="container-fluid">
+		<div class="container-fluid inner-padding">
 
 			<!--Table to display data selected which is rendered to main page by routidata-ng-->
 			<ui-view></ui-view>
@@ -52,6 +55,9 @@
 			<!--payment parameter template controller-->
 			<script src="JS/Controllers/parametrCtrl.js"></script>
 
+			<!--edit confirmation contyroller-->
+			<script src="JS/Controllers/editCtrl.js"></script>
+
 			<!--controller for delete template-->
 			<script src="JS/Controllers/deleteCtrl.js"></script>
 		 
@@ -63,6 +69,12 @@
 
 			<!--Commonservice to all controllers-->
 			<script src="JS/Services/commonService.js"></script>
+
+
+			<!--######## Application Directives #######-->
+
+			<!-- Directive for drop down of options-->
+			<script src ="JS/Directives/dropDownDirective.js"></script>
 
 	</body>
 </html>

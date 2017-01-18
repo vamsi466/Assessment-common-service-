@@ -8,6 +8,6 @@
 </div>
 <div class="col-lg-offset-8 pull right" >
         <button type="button" class=" col-lg-2  btn btn-secondary" data-ng-click=" vm.previous()"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-        <button type="button" class=" col-lg-8 btn btn-secondary" data-dismiss="modal"  data-ng-click="vm.generateDatatoTable()">Generate</i></button> 
-        <!--<button type="button" class=" col-lg-8 btn btn-secondary"data-dismiss="modal" data-ng-if="finalSave" data-ng-click="saveEdited()">Save</i></button> -->
+        <button type="button" class=" col-lg-8 btn btn-secondary" data-dismiss="modal" data-ng-hide = "vm.showSaveButton" data-ng-click="vm.generateDatatoTable()">Generate</i></button> 
+        <button type="button" class=" col-lg-8 btn btn-secondary"data-dismiss="modal" data-ng-show="vm.showSaveButton" data-ng-click="vm.saveEdited()">Save</i></button> 
     </div>

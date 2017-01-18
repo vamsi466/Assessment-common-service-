@@ -1,29 +1,18 @@
 
  <form name="paymentForm">
-    <div >
-        <!--data-ng-if="modal2"-->
+    <div>
         <div class="container-fluid" data-ng-controller="parameterCtrl as pm">
-            <div >
-                <!--data-ng-if ="isOther"-->
-                <div class="form-group col-lg-6">
+            <div data-ng-if ="vm.showComponents">
+                <div class="form-group col-lg-6" >
                     <label for="exampleSelect1">Growth Type</label>
-                    <div class=" ">
-                        <span><input class="form-control input-field input-group" type="text" placeholder="select"data-ng-model="pm.paymentDetails.growthselectedData"></span>
-                        <button class="btn btn-secondary fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        </button>
-                        <div class="dropdown-menu list-dropdown" style="overflow-y:scroll;height:150px">
-                            <input type="text" placeholder="select" data-ng-model="growth">
-                            <div data-ng-repeat="data in vm.responseData.l_GrowthType | filter:growth track by $index" data-ng-click=pm.growthSelected(data)>
-                                <li data-ng-click="typeOfGrowth(data)">{{data}}</li>
-                            </div>
-                        </div>
-                    </div>
+                    <drop-down options='vm.responseData.l_GrowthType' selectedOption="info.paymentDetails.growthselectedData" ></drop-down>
+                    <span>{{vm.errorMessage.growthselectedData}}</span>
                 </div>
-                <div data-ng-if = "!isGrowth" class="form-group col-lg-6" data-ng-model="pm.paymentDetails.accountingcostcenter">
+                <div data-ng-if = "!(pm.paymentDetails.growthselectedData=== 'Percent')" class="form-group col-lg-6" data-ng-model="pm.paymentDetails.accountingcostcenter">
                     <label for="exampleSelect1">Fixed Growth</label>
                     <input class="form-control" type="text">
                 </div>
-                <div data-ng-if= "isGrowth" class="form-group col-lg-6" data-ng-model="pm.paymentDetails.accountingcostcenter">
+                <div data-ng-if= "pm.paymentDetails.growthselectedData=== 'Percent'" class="form-group col-lg-6" data-ng-model="pm.paymentDetails.accountingcostcenter">
                     <label for="exampleSelect1">Percent Growth</label>
                     <input class="form-control" type="text">
                 </div>
@@ -37,22 +26,11 @@
                         <input class="form-control" type="text">
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-12" >
+                <div class="col-md-8 col-lg-8" >
                     <div class="form-group col-lg-4">
                         <label for="exampleSelect1">Charge Amount Basis</label>
-                        <div>
-                            <span><input class="form-control input-field" type="text" placeholder="select" name="chargeBasis" data-ng-model="pm.paymentDetails.chargeAmountselectedData" required = 'required'></span>
-                            <button class="btn btn-secondary fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </button>
-                            <div class="dropdown-menu list-dropdown" style="overflow-y:scroll;height:150px">
-                                <input type="text" placeholder="select" data-ng-model="charge">
-                                <div data-ng-repeat="data in vm.responseData.l_ChargeAmountBasis | filter:charge track by $index" data-ng-click=pm.chargeAmountSelected(data)>
-                                    <li>{{data}}</li>
-                                </div>
-                                
-                            </div>
-                            <div class="errormessage" data-ng-if="validationCheck && !paymentForm.chargeBasis.$valid">Please fill out this field</div>
-                        </div>
+                        <drop-down options='vm.responseData.l_ChargeAmountBasis' selectedOption="pm.paymentDetails.chargeAmountselectedData" ></drop-down>
+                        <span>{{vm.errorMessage.chargeAmountselectedData}}</span>
                     </div>
                     <div class="form-group col-md-4 col-lg-4" data-ng-model="paymentdetails.contract">
                         <div class="col-md-12 col-lg-12">

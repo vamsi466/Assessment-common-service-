@@ -1,22 +1,21 @@
-<div class="col-md-12 col-lg-12" >
-			<div class="title text-center">
+
+			<div class="col-md-12 col-lg-12 title text text-center">
 				<div class="col-md-offset-2 col-lg-offset-2 col-md-2 col-lg-2"><h4>Frequency Type</h4></div>
 				<div class="col-md-1 col-lg-1"><h4>Start Date</h4></div>
 				<div class="col-md-3 col-lg-3"><h4>End Date</h4></div>
 				<div class="col-md-2 col-lg-2"><h4>Total Cash <br>With Tax</h4></div>
 				<div class="col-md-2 col-lg-2"><h4>Action</h4></div>
 			</div>
-			<div class="table table-responsive zero-padd-margin">
+			<div class="table">
 				<table class="col-md-12 col-lg-12">
 					<tbody data-ng-repeat = '(key,value) in mp.tableDetails' >
-						<tr class="col-md-12 sidearrow collapsed accordion-toggle" data-toggle="collapse" data-target="#{{$index}}" class="">
-							<td colspan="5">{{key}}</td>
-							
+						<tr style="padding-top: 10px;"class="col-md-12 sidearrow accordion-toggle" data-toggle="collapse" data-target="#{{$index}}">
+							<td>{{key}}</td>	
 						</tr>
 
 						<tr>
 							<td colspan="12" class="hiddenRow">
-								<div class="accordian-body collapse  sidearrow" id="{{$index}}">
+								<div class="accordian-body collapse" id="{{$index}}">
 									<table class="table table-responsive col-md-12 innerTable">
 										<tbody data-ng-repeat="rowData in value">
 											<tr class="text-center">
@@ -38,10 +37,9 @@
 					</tbody>
 				</table>
 			</div>
-		</div>
+		
 
-
-		<button type="button" data-ng-click="mp.openModal()" class="btn btn-success btn-lg col-md-12 col-lg-12 footer-div">
+		<button type="button" data-ng-click="mp.openModal()" class="addButton col-md-12 col-lg-12">
 				+Add
 		</button>
 
